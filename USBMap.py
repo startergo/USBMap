@@ -900,6 +900,7 @@ class USBMap:
                     continue
 
     def get_safe_acpi_path(self, path):
+        if get_safe_acpi_path is not None:
         return ".".join([x.split("@")[0] for x in path.split("/") if len(x) and not ":" in x])
 
     def get_numbered_name(self, base_name, number, use_hex=True):
@@ -1095,9 +1096,10 @@ DefinitionBlock ("", "SSDT", 2, "CORP", "RHBReset", 0x00001000)
                 if not "XHCI" in self.connected_controllers[x]["type"]: continue # Only check XHCI for RHUB paths
                 # Get the RHUB name - mirrors the controller name if actually "RHUB"
                 rhub_name = "RHUB" if x.split("@")[0].upper() == self.connected_controllers[x]["parent_name"] else x.split("@")[0].upper()
-                rhub_path = ".".join([acpi,rhub_name])
-                rhub_paths.append(rhub_path)
-                print("  \\-> {}RHUB{} @ {}".format(self.bs,self.ce,rhub_path))
+                if acpi is not None:
+                    rhub_path = ".".join([acpi,rhub_name])
+                    rhub_paths.append(rhub_path)
+                    print("  \\-> {}RHUB{} @ {}".format(self.bs,self.ce,rhub_path))
         print("")
         print("{}D. Discover Ports{}{}".format(
             self.rs if needs_rename else "",
