@@ -930,8 +930,9 @@ DefinitionBlock ("", "SSDT", 2, "CORP", "UsbReset", 0x00001000)
             print("Checking {}...".format(cont))
             c_type = self.connected_controllers[cont]["type"]
             acpi_path = self.get_safe_acpi_path(self.connected_controllers[cont]["acpi_path"])
-            acpi_parent = ".".join(acpi_path.split(".")[:-1])
-            acpi_addr = self.connected_controllers[cont]["acpi_address"]
+            if acpi_path is not None:
+                acpi_parent = ".".join(acpi_path.split(".")[:-1])
+                acpi_addr = self.connected_controllers[cont]["acpi_address"]
             if "XHCI" in c_type:
                 print(" - XHCI device")
             elif "EHCI" in c_type:
