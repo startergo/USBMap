@@ -900,8 +900,8 @@ class USBMap:
                     continue
 
     def get_safe_acpi_path(self, path):
-        if get_safe_acpi_path is not None:
-        return ".".join([x.split("@")[0] for x in path.split("/") if len(x) and not ":" in x])
+        if path is not None:
+            return ".".join([x.split("@")[0] for x in path.split("/") if len(x) and not ":" in x])
 
     def get_numbered_name(self, base_name, number, use_hex=True):
         if use_hex: number = hex(number).replace("0x","").upper()
