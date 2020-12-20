@@ -39,7 +39,7 @@ Python script for mapping USB ports in macOS and creating a custom injector kext
 
 Run the following one line at a time in Terminal:
 
-    git clone https://github.com/corpnewt/USBMap
+    git clone https://github.com/startergo/USBMap
     cd USBMap
     chmod +x USBMap.command
     
